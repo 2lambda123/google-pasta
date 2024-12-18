@@ -1144,7 +1144,8 @@ def get_base_visitor(astlib=ast):
               node, 'comma_%d' % arg_i, [self.ws, ',', self.ws], default=', ')
 
       for i, (arg, pattern) in enumerate(zip(node.kwd_attrs, node.kwd_patterns)):
-        self.visit(arg)
+        self.attr(node, 'arg_%d' % i, [self.ws, arg, self.ws],
+                  deps=('kwd_attrs',))
         self.attr(node, 'pattern_%d' % i, [self.ws, '=', self.ws], default='=')
         self.visit(pattern)
         arg_i += 1

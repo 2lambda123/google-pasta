@@ -1,0 +1,30 @@
+(-1, -1)     Module               	prefix=|@@indent@@|	suffix=|@@indent@@|	indent=||
+(1, 0)       Match                	prefix=||	suffix=||	indent=||
+(1, 6)       Name a               	prefix=||	suffix=||	indent=||
+(-1, -1)     match_case           	prefix=|@@indent@@|	suffix=||	indent=|  |
+(-1, -1)     match_case           	prefix=|@@indent@@|	suffix=||	indent=|  |
+(-1, -1)     match_case           	prefix=|@@indent@@|	suffix=||	indent=|  |
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
+(2, 7)       MatchClass           	prefix=||	suffix=||	indent=|  |
+(3, 4)       Expr                 	prefix=|@@indent@@|	suffix=|\n|	indent=|    |
+(4, 7)       MatchClass           	prefix=||	suffix=||	indent=|  |
+(5, 4)       Expr                 	prefix=|@@indent@@|	suffix=|\n|	indent=|    |
+(6, 9)       MatchClass           	prefix=||	suffix=||	indent=|  |
+(7, 4)       Expr                 	prefix=|@@indent@@|	suffix=|\n|	indent=|    |
+(2, 7)       Name B               	prefix=||	suffix=||	indent=|  |
+(3, 4)       Name c               	prefix=||	suffix=||	indent=|    |
+(4, 7)       Name D               	prefix=||	suffix=||	indent=|  |
+(4, 9)       MatchAs e            	prefix=||	suffix=||	indent=|  |
+(4, 14)      MatchAs g            	prefix=||	suffix=||	indent=|  |
+(5, 4)       Name h               	prefix=||	suffix=||	indent=|    |
+(6, 9)       Name I               	prefix=||	suffix=|   |	indent=|  |
+(6, 15)      MatchAs j            	prefix=||	suffix=|    |	indent=|  |
+(6, 28)      MatchAs l            	prefix=||	suffix=||	indent=|  |
+(6, 32)      MatchAs n            	prefix=||	suffix=||	indent=|  |
+(7, 4)       Name o               	prefix=||	suffix=||	indent=|    |
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
+(-1, -1)     Load                 	prefix=||	suffix=||	indent=||
