@@ -570,6 +570,13 @@ class VersionSupportTest(test_utils.TestCase):
         'type_ignore',
         'unaryop',
         'pattern',
+        # TODO: Support these
+        'TypeVarTuple',
+        'TypeAlias',
+        'TypeVar',
+        '_ast_Ellipsis',
+        'ParamSpec',
+        'type_param'
     }
     self.assertEqual(set(), ast_nodes - handled_nodes - ignored_nodes)
 

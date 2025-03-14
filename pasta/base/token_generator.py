@@ -378,6 +378,46 @@ class TokenGenerator(object):
       original fstring data are replaced by placeholders to make it possible to
       fill them in with new values, if desired.
     """
+    def fstr_parser_312():
+      content = ''
+
+      # May be inside a FormattedValue format_spec
+      in_format_spec = self.peek().type != TOKENS.FSTRING_START
+
+      val_idx = 0
+      level = 0
+      tok = None
+      while True:
+        if tok and self.peek().type in (TOKENS.FSTRING_START, TOKENS.STRING):
+          content += self._space_between(tok.end, self.peek().start)
+        tok = self.next()
+        if tok.type == TOKENS.OP:
+          if tok.src == '}':
+            level -= 1
+            if in_format_spec and level < 0:
+              self.rewind()
+              self._loc = self._tokens[self._i].end
+              break
+          content += tok.src
+          if tok.src == '{':
+            level += 1
+            content += fstring_utils.placeholder(val_idx)
+            val_idx += 1
+            yield (content, self)
+            content = ''
+        elif tok.type == TOKENS.FSTRING_MIDDLE:
+          content += tok.src.replace('{', '{{').replace('}', '}}')
+        else:
+          content += tok.src
+          if tok.type in (TOKENS.FSTRING_END, TOKENS.STRING, TOKENS.NL):
+            next_tok = self.peek()
+            if (next_tok and
+                next_tok.type not in (TOKENS.FSTRING_START, TOKENS.STRING,
+                                      TOKENS.NL)):
+              break
+
+      yield (content, None)
+
     def fstr_parser():
       # Reads the whole fstring as a string, then parses it char by char
       if self.peek_non_whitespace().type == TOKENS.STRING:
@@ -482,6 +522,9 @@ class TokenGenerator(object):
             i, c = next(indexed_chars)
       # Yield the rest of the fstring, when done
       yield (result, None)
+
+    if hasattr(TOKENS, 'FSTRING_START'):
+      return fstr_parser_312
     return fstr_parser
 
   def _space_between(self, start_loc, end_loc):

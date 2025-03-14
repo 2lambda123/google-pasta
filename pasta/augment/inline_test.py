@@ -65,15 +65,15 @@ class InlineTest(test_utils.TestCase):
         NOT_A_CONSTANT += "bar"
         """)
     t = astlib.parse(src)
-    with self.assertRaisesRegexp(inline.InlineError,
-                                 '\'NOT_A_CONSTANT\' is not a constant'):
+    with self.assertRaisesRegex(inline.InlineError,
+                                '\'NOT_A_CONSTANT\' is not a constant'):
       inline.inline_name(t, 'NOT_A_CONSTANT', astlib=astlib)
 
   def test_inline_function_fails(self):
     src = 'def func(): pass\nfunc()\n'
     t = astlib.parse(src)
 
-    with self.assertRaisesRegexp(
+    with self.assertRaisesRegex(
         inline.InlineError, '\'func\' is not a constant; it has type %r' %
         astlib.FunctionDef):
       inline.inline_name(t, 'func', astlib=astlib)
@@ -81,14 +81,14 @@ class InlineTest(test_utils.TestCase):
   def test_inline_conditional_fails(self):
     src = 'if define:\n  x = 1\na = x\n'
     t = astlib.parse(src)
-    with self.assertRaisesRegexp(inline.InlineError,
-                                 '\'x\' is not a top-level name'):
+    with self.assertRaisesRegex(inline.InlineError,
+                                '\'x\' is not a top-level name'):
       inline.inline_name(t, 'x', astlib=astlib)
 
   def test_inline_non_assign_fails(self):
     src = 'CONSTANT1, CONSTANT2 = values'
     t = astlib.parse(src)
-    with self.assertRaisesRegexp(
+    with self.assertRaisesRegex(
         inline.InlineError, '\'CONSTANT1\' is not declared in an assignment'):
       inline.inline_name(t, 'CONSTANT1', astlib=astlib)
 
